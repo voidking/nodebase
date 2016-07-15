@@ -9,6 +9,7 @@ var group = require('./controllers/group');
 var post = require('./controllers/post');
 var message = require('./controllers/message');
 var test = require('./controllers/test');
+var weixin = require('./controllers/weixin');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/forum');
 
@@ -22,7 +23,9 @@ router.get('/test/share',test.share); // 分享
 router.get('/test/page',test.page);// 分页
 router.get('/test/emoji',test.emoji);// 表情
 router.get('/test/translate',test.translate);// css translate属性
-router.get('/test/wechat',test.wechat);// 微信
+
+// 微信相关
+router.get('/weixin/home',weixin.home);// 微信
 
 // 主页
 router.get('/', site.index);
