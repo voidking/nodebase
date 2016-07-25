@@ -2,8 +2,8 @@
  * Created by haojin on 2016/4/9 0009.
  */
 var config = {
-    //host: 'http://localhost',
-    host: 'http://wx.voidking.com',
+    host: 'http://localhost',
+    //host: 'http://wx.voidking.com',
     cookieSecret: 'voidking',
     key: 'voidking',
     weixin:{

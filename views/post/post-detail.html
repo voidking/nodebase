@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head lang="zh-CN">
-    <%- include ../partial/head %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="<%= post.content%>">
+    <link rel="shortcut icon" href="/img/common/favicon.png" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap-theme.min.css" >
+    <link rel="stylesheet" href="/Swiper/dist/css/swiper.min.css" >
+    <link rel="stylesheet" href="/seajs/layer/skin/layer.css">
     <link rel="stylesheet" href="/css/post/post-detail.css">
-    <script src="/js/util/qqface/js/jquery.qqFace.js"></script>
-    <script src="/js/util/qqface/js/jquery-browser.js"></script>
-    <script src="/js/post/post-detail.js"></script>
+    <title><%= title %></title>
 </head>
 
 <body>
-<%- include ../partial/header %>
+<%- include ../partial/header.html %>
 <div class="banner-body">
     <span class="icon-star has-star" style="display: none;">
         <i class="glyphicon glyphicon-star" style="color: #00B26B;"></i>
@@ -178,6 +182,9 @@
     {{/each}}
 </script>
 
-<%- include ../partial/footer %>
+<%- include ../partial/footer.html %>
+<%- include ../partial/seajs.html %>
+<script src="/js/partial/header.js"></script>
+<script src="/js/post/post-detail.js"></script>
 </body>
 </html>

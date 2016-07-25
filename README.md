@@ -1,6 +1,6 @@
 # nodebase
 a node framework designed for myself    
-version: v1.0.0    
+version: v1.1.0    
 url: https://github.com/voidking/nodebase.git       
 
 # 作者相关
@@ -31,6 +31,14 @@ node --debug app.js
 
 # 运行
 `node app.js`，访问`http://localhost`
+
+
+# 未解决bug记录
+2016.07.17，qqface插件CMD模块化出现问题。   
+
+# 更新说明
+2016.07.14，版本1.0.0，在毕设基础上的第一个版本。      
+2016.07.25，版本1.1.0，使用seajs管理js文件。    
 
 
 

@@ -7,7 +7,6 @@ var app = express();
 var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-//var routes = require('./routes/index');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -26,16 +25,16 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.set('views','./views');
-app.set('view engine', 'html');
+app.set('views','./views');// 页面目录配置
+app.set('view engine', 'html');// ejs文件以html结尾
 app.engine('html', require('ejs-mate'));
-//app.set('view engine','ejs');
-app.use(flash());
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(flash());// 消息通知
+app.use(bodyParser.json({limit: '50mb'}));// ajax请求时data的大小限制
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+
+// 把文件夹中的内容添加到网站主目录下，静态文件务必添加，否则访问不到
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use('/', webRouter);
 

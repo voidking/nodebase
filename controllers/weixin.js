@@ -24,7 +24,6 @@ exports.home = function(req, res){
         // 未关注用户的
         var code = req.query.code;
         var state = req.query.state;
-        var temp = {};
         // 通过code换取网页授权access_token
         var params = {
             appid:config.weixin.appid,
@@ -34,13 +33,23 @@ exports.home = function(req, res){
         };
         
         var ep = new eventproxy();
-        ep.all('share','userInfo',function(shareData,userInfoData){
-            console.log(shareData);
+        ep.all('shareConfig','userInfo',function(shareConfigData,userInfoData){
+            console.log(shareConfigData);
             console.log(userInfoData);
+            var shareData = {
+                enable: true,
+                title: '艾佳生活送你2G流量，先到先得，快来抢吧！',
+                icon: 'http://7vilis.com1.z0.glb.clouddn.com/image/flowrate/share.jpg',
+                desc: '我在艾佳生活抢到了2G流量，百万流量送送送，赶紧加入全民疯抢趴！',
+                mUrl: config.host+'/flowrate/share?openid=000&nickname=voidking&num=10',
+                url: config.host + '/weixin/home?code='+code+'&state='+state
+            };
             res.render('./weixin/home',{
                 title: '微信',
                 host: config.host,
-                sharedata: shareData
+                shareConfigData: shareConfigData,
+                shareData: shareData,
+                userInfoData: JSON.parse(userInfoData)
             });
         });
 
@@ -50,7 +59,7 @@ exports.home = function(req, res){
             url: req.protocol+"://"+req.hostname+req.originalUrl
         };     
         WXapi.getJsConfig(param, function(err,result){
-            ep.emit('share',result);    
+            ep.emit('shareConfig',result);    
         });
 
         // 通过code换取网页授权access_token
@@ -67,7 +76,6 @@ exports.home = function(req, res){
                 console.log(re);
                 var getuserinfo = 'https://api.weixin.qq.com/sns/userinfo?access_token='+re.access_token+'&openid='+re.openid+'&lang=zh_CN';
                 request.get(getuserinfo,function(error2, response2, body2){
-                    console.log(getuserinfo);
                     if (!error2 && response2.statusCode == 200) {
                         ep.emit('userInfo',response2.body);
                     }
@@ -75,4 +83,31 @@ exports.home = function(req, res){
             }
         });
     }
+}
+
+exports.userinfo = function(req, res){
+    
+    function getArg(str,arg) {
+        var reg = new RegExp('(^|&)' + arg + '=([^&]*)(&|$)', 'i');
+        var r = str.match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+    String.prototype.replaceAll  = function(s1,s2){     
+        return this.replace(new RegExp(s1,"gm"),s2);     
+    } 
+
+    var str = decodeURI(req.url.split('?')[1]);
+    console.log(str);
+    str = str.replaceAll('&amp%3B','&');
+    str = str.replaceAll('&amp;','&');
+    console.log(str);
+    var name = getArg(str,'name');
+    console.log(name);
+    res.render('weixin/userinfo',{
+        title: '用户信息',
+        host: config.host
+    });
 }

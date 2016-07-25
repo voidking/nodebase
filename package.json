@@ -1,7 +1,7 @@
 {
-  "name": "nodeforum",
-  "version": "1.4.0",
-  "description": "graduation project",
+  "name": "nodebase",
+  "version": "1.1.0",
+  "description": "a node framework designed for myself",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.0",
@@ -35,12 +35,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voidking/nodeforum.git"
+    "url": "git+https://github.com/voidking/nodebase.git"
   },
   "author": "voidking",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/voidking/nodeforum/issues"
+    "url": "https://github.com/voidking/nodebase/issues"
   },
-  "homepage": "https://github.com/voidking/nodeforum#readme"
+  "homepage": "https://github.com/voidking/nodebase#readme"
 }

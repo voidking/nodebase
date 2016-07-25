@@ -16,16 +16,14 @@ mongoose.connect('mongodb://localhost/forum');
 var router = express.Router();
 
 // 测试相关
-router.get('/test/cropper',test.cropper);// 截图
 router.get('/test/chat',test.chat);// 聊天
 router.get('/test/baidu-map',test.baidu_map);// 百度地图
 router.get('/test/share',test.share); // 分享
-router.get('/test/page',test.page);// 分页
-router.get('/test/emoji',test.emoji);// 表情
-router.get('/test/translate',test.translate);// css translate属性
+router.get('/test/caculate',test.caculate);
 
 // 微信相关
 router.get('/weixin/home',weixin.home);// 微信
+router.get('/weixin/userinfo',weixin.userinfo);
 
 // 主页
 router.get('/', site.index);

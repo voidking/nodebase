@@ -2,10 +2,11 @@
 <html>
 <head lang="zh-CN">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/img/common/favicon.png" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap-theme.min.css" >
     <title>聊天</title>
-    <%- include ../partial/head %>
-    <script src="/js/test/chat.js"></script>
-    <script src="/socket.io-client/socket.io.js"></script>
 </head>
 <body>
 <form class="form-horizontal" enctype="multipart/form-data">
@@ -44,6 +45,7 @@
         </div>
     </div>
 </form>
-
+<%- include ../partial/seajs.html %>
+<script src="/js/test/chat.js"></script>
 </body>
 </html>

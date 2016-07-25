@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head lang="zh-CN">
-    <%- include ./partial/head %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/img/common/favicon.png" />
     <link rel="stylesheet" href="/css/404.css">
-    <script src="/js/404.js"></script>
+    <title><%= title %></title>
     <!--<meta http-equiv="refresh" content="5;url=<%= host%>"/>-->
 </head>
 
@@ -20,6 +22,7 @@
         </div>
     </div>
 </div>
-
+<%- include ./partial/seajs.html %>
+<script src="/js/404.js"></script>
 </body>
 </html>
