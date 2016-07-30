@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>七夕礼物测试活动</title>
+    <link rel="shortcut icon" href="/img/common/favicon.png" />
+    <link rel="stylesheet" href="/seajs/layer/skin/layer.css">
+    <link rel="stylesheet" href="/css/weixin/love.css">
+</head>
+<body>
+	<form action="/weixin/result" method="post">
+		<div class="gender">
+			<label>性别：</label>
+			男<input type="radio" name="gendar" value="male" checked>
+			女<input type="radio" name="gendar" value="female">
+		</div>
+		<div class="birthday">
+			<label>生日：</label>
+			<select name="month" id="month">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>月
+			<select name="day" id="day">
+			</select>日
+		</div>
+		<div class="single">
+			<label>单身：</label>
+			<select name="single" id="">
+				<option value="yes">是</option>
+				<option value="no">否</option>
+			</select>
+		</div>
+		<input type="submit" value="确定">
+		<div class="birthday2">
+			<label>生日：</label>
+			<div class="simulate-select" id="month-box">
+				<input class="input" name="month2" type="hidden" value="1">
+				<div class="check">1</div>月
+				<ul class="items">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>6</li>
+					<li>7</li>
+					<li>8</li>
+					<li>9</li>
+					<li>10</li>
+					<li>11</li>
+					<li>12</li>
+				</ul>
+			</div>
+			<div class="simulate-select" id="day-box">
+				<input class="input" name="day2" type="hidden" value="1">
+				<div class="check">1</div>日
+				<ul class="items">
+				</ul>
+			</div>
+		</div>
+	</form>
+	<!-- <div class="count">已有<%= countData.count%>人参与</div> -->
+<%- include ../partial/seajs.html %>
+<script type="text/javascript" src="/js/weixin/love.js"></script>
+</body>
+</html>

@@ -24,6 +24,8 @@ router.get('/test/caculate',test.caculate);
 // 微信相关
 router.get('/weixin/home',weixin.home);// 微信
 router.get('/weixin/userinfo',weixin.userinfo);
+router.get('/weixin/love',weixin.love);
+router.post('/weixin/result',weixin.result);
 
 // 主页
 router.get('/', site.index);

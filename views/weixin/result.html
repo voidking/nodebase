@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>判断结果</title>
+    <link rel="shortcut icon" href="/img/common/favicon.png" />
+    <link rel="stylesheet" href="/seajs/layer/skin/layer.css">
+</head>
+<body>
+	<div>
+		<%= gift.result.gift%>
+	</div>
+	<div>
+		<% gift.result.info.forEach(function(p){%>
+		<p><%= p%></p>
+		<% })%>
+	</div>
+<%- include ../partial/seajs.html %>
+<script type="text/javascript" src="/js/weixin/result.js"></script>
+</body>
+</html>

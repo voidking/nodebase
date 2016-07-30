@@ -7,6 +7,8 @@ var wechat = require('wechat');
 var urlencode = require('urlencode');
 var eventproxy = require('eventproxy');
 var request = require('request');
+var fs = require('fs');
+var path = require('path');
 
 var WechatAPI    = require('wechat-api');
 
@@ -24,13 +26,6 @@ exports.home = function(req, res){
         // 未关注用户的
         var code = req.query.code;
         var state = req.query.state;
-        // 通过code换取网页授权access_token
-        var params = {
-            appid:config.weixin.appid,
-            secret:config.weixin.appsecret,
-            code:code,
-            grant_type:'authorization_code'
-        };
         
         var ep = new eventproxy();
         ep.all('shareConfig','userInfo',function(shareConfigData,userInfoData){
@@ -38,11 +33,10 @@ exports.home = function(req, res){
             console.log(userInfoData);
             var shareData = {
                 enable: true,
-                title: '艾佳生活送你2G流量，先到先得，快来抢吧！',
-                icon: 'http://7vilis.com1.z0.glb.clouddn.com/image/flowrate/share.jpg',
-                desc: '我在艾佳生活抢到了2G流量，百万流量送送送，赶紧加入全民疯抢趴！',
-                mUrl: config.host+'/flowrate/share?openid=000&nickname=voidking&num=10',
-                url: config.host + '/weixin/home?code='+code+'&state='+state
+                title: '分享',
+                icon: 'http://7oxjrx.com1.z0.glb.clouddn.com//imgs/head.jpg',
+                desc: '没见过这么拉风的分享描述吧！',
+                mUrl: config.host+'/weixin/userinfo?openid=000&nickname=voidking&num=10'
             };
             res.render('./weixin/home',{
                 title: '微信',
@@ -111,3 +105,119 @@ exports.userinfo = function(req, res){
         host: config.host
     });
 }
+
+exports.love = function(req, res){
+    
+    var ep = new eventproxy();
+    ep.all('count',function(countData){
+        res.render('weixin/love',{
+            title: '七夕礼物测试活动',
+            host: config.host,
+            countData: JSON.parse(countData)
+        });
+    });
+
+    fs.readFile(path.join(__dirname,'../public/data/count.json'),{encoding:'utf-8'},function(error, data){
+        //console.log(data);
+        ep.emit('count',data);
+    });
+    
+}
+
+exports.result = function(req, res){
+    var gendar = req.body.gendar;
+    var month = parseInt(req.body.month);
+    var day = parseInt(req.body.day);
+    var single = req.body.single;
+    var param = '';
+    var sub_param = '';
+    var star = '';
+    var sex = '';
+    var state = '';
+    // 给star赋值
+    if(month==1 && day>=20 || month==2 && day<=18){
+        star = '水瓶座';
+    }else if(month==2 && day>=19 || month==2 && day<=20){
+        star = '双鱼座';
+    }else if(month==3 && day>=21 || month==4 && day<=19){
+        star = '白羊座';
+    }else if(month==4 && day>=20 || month==5 && day<=20){
+        star = '金牛座';
+    }else if(month==5 && day>=21 || month==6 && day<=21){
+        star = '双子座';
+    }else if(month==6 && day>=22 || month==7 && day<=22){
+        star = '巨蟹座';
+    }else if(month==7 && day>=23 || month==8 && day<=22){
+        star = '狮子座';
+    }else if(month==8 && day>=23 || month==9 && day<=22){
+        star = '处女座';
+    }else if(month==9 && day>=23 || month==10 && day<=23){
+        star = '天秤座';
+    }else if(month==10 && day>=24 || month==11 && day<=22){
+        star = '天蝎座';
+    }else if(month==11 && day>=23 || month==12 && day<=21){
+        star = '射手座';
+    }else if(month==12 && day>=22 || month==1 && day<=19){
+        star = '摩羯座';
+    }
+    // 给sex赋值
+    if(gendar == 'male'){
+        sex = '男';
+    }else if(gendar == 'female'){
+        sex = '女';
+    }
+    // 给state赋值
+    if(single == 'yes'){
+        state = '单';
+    }else if(single == 'no'){
+        state = '恋';
+    }
+    // 给param赋值
+    param = star + sex + state;
+    sub_param = sex + state;
+
+    var ep = new eventproxy();
+    ep.all('gift',function(giftData){
+        var giftList = JSON.parse(giftData).giftList;
+        //console.log(giftList);
+        var gift = {};
+        for (var i = 0; i < giftList.length; i++) {
+            if(sub_param == giftList[i].param){
+                gift = giftList[i];
+            }else if(param == giftList[i].param){
+                gift = giftList[i];
+            }
+        }
+        var shareData = {
+            enable: true,
+            title: '艾佳生活送你2G流量，先到先得，快来抢吧！',
+            icon: 'http://7vilis.com1.z0.glb.clouddn.com/image/flowrate/share.jpg',
+            desc: '我在艾佳生活抢到了2G流量，百万流量送送送，赶紧加入全民疯抢趴！',
+            mUrl: config.host+'/flowrate/share?openid=000&nickname=voidking&num=10'
+        };
+        res.render('weixin/result',{
+            title: '七夕礼物测试活动',
+            host: config.host,
+            gift: gift
+        });
+        fs.readFile(path.join(__dirname,'../public/data/count.json'),{encoding:'utf-8'},function(error, data){
+            //console.log(data);
+            var count = parseInt(JSON.parse(data).count);
+            count++;
+            var countData = {
+                count: count
+            };
+            fs.writeFile(path.join(__dirname,'../public/data/count.json'),JSON.stringify(countData),function(error){
+                console.log('success');
+            });
+        });
+        
+    });
+    
+    var url = config.host + '/data/gift.json';
+    request.get({url: url},function(error, response, body){
+        // console.log(response.body)
+        ep.emit('gift',response.body);
+    });
+}
+

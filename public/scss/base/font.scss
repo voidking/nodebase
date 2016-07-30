@@ -1,4 +1,6 @@
-/* rem的基准 */
+// rem的基准
+@charset "utf-8";
+
 html{ font-size: 10px;}
 @media(min-device-width:375px){
   html{font-size: 12px;}
