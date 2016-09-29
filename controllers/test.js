@@ -31,3 +31,10 @@ exports.share = function(req, res){
         title: '分享'
     });
 }
+
+// 师大附中
+exports.index = function(req, res){
+    res.render('./test/index',{
+        title: '师大附中'
+    });
+}

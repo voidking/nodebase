@@ -137,7 +137,7 @@ exports.result = function(req, res){
     // 给star赋值
     if(month==1 && day>=20 || month==2 && day<=18){
         star = '水瓶座';
-    }else if(month==2 && day>=19 || month==2 && day<=20){
+    }else if(month==2 && day>=19 || month==3 && day<=20){
         star = '双鱼座';
     }else if(month==3 && day>=21 || month==4 && day<=19){
         star = '白羊座';

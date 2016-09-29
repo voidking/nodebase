@@ -20,6 +20,7 @@ router.get('/test/chat',test.chat);// 聊天
 router.get('/test/baidu-map',test.baidu_map);// 百度地图
 router.get('/test/share',test.share); // 分享
 router.get('/test/caculate',test.caculate);
+router.get('/test/index',test.index);
 
 // 微信相关
 router.get('/weixin/home',weixin.home);// 微信
